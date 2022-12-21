@@ -1,7 +1,7 @@
 <template>
         <div class="post-card">
             <h2 class="name">{{name}}</h2>
-            <h2 class="title">{{title}}</h2>
+            <h2 class="title" v-if="title !== undefined">{{title}}</h2>
             <ul class="tags">
                 <li
                 class="tags-item"
@@ -17,7 +17,7 @@
 const props = defineProps({
     title: {
         type: String,
-        required: true
+        required: false
     },
     name: {
         type: String,

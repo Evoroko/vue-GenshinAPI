@@ -1,5 +1,5 @@
 <template>
-    <p>Nations</p>
+    <p>Footer</p>
 </template>
 
 <script setup>

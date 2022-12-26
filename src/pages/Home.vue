@@ -4,6 +4,7 @@
 // https://api.genshin.dev/characters/albedo/portrait
 import HelloWorld from '../components/HelloWorld.vue';
 import CharaCard from '../components/CharaCard.vue';
+import VLoader from '../components/VLoader.vue';
 import { onMounted, ref } from 'vue'
 
 
@@ -11,11 +12,12 @@ import { onMounted, ref } from 'vue'
 const endpointCharacters = `https://api.genshin.dev/characters/`;
 const characters = ref([]);
 const charactersDetails = ref([]);
+const charactersImgLink = ref([]);
 fetch(endpointCharacters)
 .then(response => response.json())
 .then(data => {
   characters.value = data
-  console.log(characters.value)
+  // console.log(characters.value)
   return characters.value;
 })
 .then(data => {
@@ -24,9 +26,11 @@ fetch(endpointCharacters)
     .then(response => response.json())
     .then(data => {
       charactersDetails.value.push(data);
+      charactersImgLink.value.push(chara);
     })
   });
   console.log(charactersDetails.value)
+  console.log(charactersImgLink.value)
   return charactersDetails.value;
 });
 
@@ -51,32 +55,25 @@ onMounted(async () => {
 
 <template>
   <div class="home">
-    <h1>Test</h1>
-    <!-- Exemple de lien à utiliser pour lier vos cards à la page `Post` -->
-    <!-- <pre>{{posts}}</pre> -->
-    <!-- <VLoader v-if="posts.length === 0">Chargement du post...</VLoader> -->
-    <section class="container">
-      <CharaCard v-for="character in charactersDetails"
-          :title="character.title"
+    <h2>Personnages</h2>
+    <VLoader v-if="charactersDetails.length === 0">Chargement des personnages...</VLoader>
+    <div class="chara__container">
+      <CharaCard v-for="(character, characterKey) in charactersDetails"
+          :rarity="character.rarity"
           :name="character.name"
-          :vision="character.vision"
+          :min_name="charactersImgLink[characterKey]"
+          :vision="character.vision_key.toLowerCase().trim()"
       />
-    </section>
-    
-
-    <!-- <div class="articles">
-      <div class="articles__el" v-for="post in posts">
-        <h2>{{post.title}}</h2>
-        <p>{{post.body}}</p>
-        <ul class="articles__list" v-for="tag in post.tags">
-          <li>{{tag}}</li>          
-        </ul>
-      </div>
-    </div> -->
+    </div>
     
   </div>
 </template>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.chara__container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
 </style>

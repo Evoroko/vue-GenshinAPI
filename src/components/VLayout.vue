@@ -1,16 +1,15 @@
 <template>
-    <TheHeader/>
+    <VHeader/>
     
     <main>
         <slot/>
     </main>
 
-    <footer>
-        THE FOOTER
-    </footer>
+    <VFooter/>
 </template>
 
 <script setup>
-import TheHeader from './TheHeader.vue';
+import VHeader from './VHeader.vue';
+import VFooter from './VFooter.vue';
 
 </script>

@@ -13,7 +13,7 @@ const router = createRouter({
             path: '/about'
         }
     ],
-    history: createWebHistory()
+    history: createWebHistory('/projets/dist/')
 })
 
 export default router

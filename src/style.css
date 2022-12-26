@@ -8,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #1A1C21;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,20 +24,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #3AC8D1;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  color: #9DE3E8;
 }
 
 body {
@@ -76,6 +67,9 @@ button:focus-visible {
   padding: 2em;
 }
 
+ul{
+  list-style-type: none;
+}
 
 /* 
 @media (prefers-color-scheme: light) {

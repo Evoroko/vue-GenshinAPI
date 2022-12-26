@@ -2,9 +2,9 @@
 // https://genshinlist.com/developer-api
 // https://api.genshin.dev/nations/inazuma/icon
 // https://api.genshin.dev/characters/albedo/portrait
-import HelloWorld from '../components/HelloWorld.vue';
-import CharaCard from '../components/CharaCard.vue';
+import VCharaCard from '../components/VCharaCard.vue';
 import VLoader from '../components/VLoader.vue';
+import VNations from '../components/VNations.vue';
 import { onMounted, ref } from 'vue'
 
 
@@ -38,6 +38,33 @@ fetch(endpointCharacters)
 // Nations list
 const endpointNations = `https://api.genshin.dev/nations/`;
 const nations = ref([]);
+const nationsDetails = ref([]);
+const nationsImgLink = ref([]);
+
+fetch(endpointNations)
+.then(response => response.json())
+.then(data => {
+  nations.value = data
+  return nations.value;
+})
+.then(data => {
+  data.forEach(function(nation) {
+    fetch(`https://api.genshin.dev/nations/${nation}`)
+    .then(response => response.json())
+    .then(data => {
+      nationsDetails.value.push(data);
+      nationsImgLink.value.push(nation);
+    })
+  });
+  return nationsDetails.value;
+});
+
+
+
+
+
+
+
 
 const fetchNations = async () => {
   const nationfetchResponse = await fetch(endpointNations)
@@ -55,10 +82,20 @@ onMounted(async () => {
 
 <template>
   <div class="home">
-    <h2>Personnages</h2>
+    <h2 class="title title--big">Nations</h2>
+      <div class="container container__nations">
+        <VNations v-for="(nationDetails, key) in nationsDetails"
+          :name="nationDetails.name"
+          :vision="nationDetails.element.toLowerCase().trim()"
+          :name_min="nationsImgLink[key]"
+        ></VNations>
+      </div>
+    
+    
+    <h2 class="title title--big">Personnages</h2>
     <VLoader v-if="charactersDetails.length === 0">Chargement des personnages...</VLoader>
-    <div class="chara__container">
-      <CharaCard v-for="(character, characterKey) in charactersDetails"
+    <div class="container container__chara">
+      <VCharaCard v-for="(character, characterKey) in charactersDetails"
           :rarity="character.rarity"
           :name="character.name"
           :min_name="charactersImgLink[characterKey]"
@@ -69,11 +106,32 @@ onMounted(async () => {
   </div>
 </template>
 
-<style lang="scss" scoped>
-.chara__container{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
+<style lang="scss">
+.container{
+  
+  margin-bottom: 32px;
+
+  &__chara{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  &__nations{
+    display: flex;
+    gap: 16px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+
+.title{
+  margin-bottom: 16px;
+  &--big{
+    font-size: 31px;
+    margin-bottom: 32px;
+  }
 }
 </style>

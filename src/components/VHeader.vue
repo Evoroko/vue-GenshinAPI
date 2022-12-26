@@ -1,9 +1,10 @@
 <template>
   <header class="header">
     <nav class="header__main-nav">
-      <h1 class="header__logo">Genshin Impact App</h1>
+      <RouterLink class="header__logo" to="/"><h1>Genshin Impact App</h1></RouterLink>
       
-      <ul>
+      
+      <ul class="header__links">
         <li>
           <RouterLink to="/">Home</RouterLink>
         </li>
@@ -16,47 +17,25 @@
 </template>
 
 <style lang="scss" scoped>
-.header {
-  height: 10rem;
-  background: #2c3e50;
-  color: white;
-  padding: 0 2rem;
+.header{
+  background-color: #022528;
 
-  &__logo {
-    font-size: 2rem;
-    font-weight: 700;
+  &__main-nav{
+    display: flex;
+    padding: 16px;
+    gap: 32px;
+    align-items: baseline;
   }
 
-  &__main-nav {
-    height: 100%;
+  h1{
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+  }
+
+  &__links{
     display: flex;
-    align-items: center;
-    gap: 2rem;
-
-    ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      height: inherit;
-      margin: 0;
-      list-style: none;
-    }
-
-    li:not(:last-child)::after {
-      content: '|';
-      display: inline-block;
-      margin-left: 1rem;
-    }
-
-    a {
-      font-weight: bold;
-      color: white;
-    }
-
-    a.router-link-exact-active {
-      color: #42b983;
-    }
+    gap: 16px;
   }
 }
 </style>

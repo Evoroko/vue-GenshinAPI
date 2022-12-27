@@ -1,4 +1,5 @@
 <template>
+    <RouterLink :to="`/character/${min_name}`">
         <div class="chara">
             <div class="chara__txt">
                 <div class="chara__title">
@@ -11,8 +12,9 @@
                 </div>              
             </div>
             
-            <img class="chara__card" :src="'https://api.genshin.dev/characters/' + min_name + '/card'">
+            <img class="chara__card" decoding="async" :src="'https://api.genshin.dev/characters/' + min_name + '/card'">
         </div>
+    </RouterLink>
 </template>
 
 <script setup>
@@ -46,6 +48,7 @@ const props = defineProps({
 .chara{
     width: 160px;
     height: 300px;
+    min-width: 160px;
     position: relative;
     border-radius: 8px;
     display: flex;
@@ -55,6 +58,8 @@ const props = defineProps({
         width: 100%;
         padding: 16px;
         text-align: left;
+        color: white;
+        width: 128px;
     }
 
     &__title{
@@ -78,6 +83,7 @@ const props = defineProps({
         top: 0;
         left: 0;
         border-radius: 8px;
+        object-fit: cover;
     }
     
 

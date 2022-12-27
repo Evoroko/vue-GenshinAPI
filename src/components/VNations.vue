@@ -5,7 +5,7 @@
             <h3 class="hordcard__title">{{name}}</h3>
         </div>
         
-        <img class="horcard__bg" :src="'https://api.genshin.dev/nations/' + name_min + '/icon'" alt="">
+        <img class="horcard__bg" decoding="async" :src="'https://api.genshin.dev/nations/' + name_min + '/icon'" alt="">
     </div>
 </template>
 
@@ -28,7 +28,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .horcard{
-    width: 300px;
+    flex-grow: 1;
     height: 164px;
     border-radius: 8px;
     position: relative;

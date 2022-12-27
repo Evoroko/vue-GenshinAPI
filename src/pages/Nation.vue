@@ -27,26 +27,26 @@
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
   
-  const route = useRoute()
+  // const route = useRoute()
   
-  const id = route.params.id
+  // const id = route.params.id
   
   
   
-  // Dé-commenter les deux lignes ci-dessous
-  const endpoint = `https://dummyjson.com/posts/${id}`
-  const post = ref(null);
+  // // Dé-commenter les deux lignes ci-dessous
+  // const endpoint = `https://dummyjson.com/posts/${id}`
+  // const post = ref(null);
   
-  const fetchPost = async () => {
-    const response = await fetch(endpoint)
-    return await response.json()
-  }
+  // const fetchPost = async () => {
+  //   const response = await fetch(endpoint)
+  //   return await response.json()
+  // }
   
-  onMounted(async () => {
-    const response = await fetchPost()
+  // onMounted(async () => {
+  //   const response = await fetchPost()
   
-    post.value = response
-  })
+  //   post.value = response
+  // })
   </script>
   
   <style scoped lang="scss">

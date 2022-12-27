@@ -18,7 +18,7 @@
 
 <style lang="scss" scoped>
 .header{
-  background-color: #022528;
+  background-color: #111113;
 
   &__main-nav{
     display: flex;

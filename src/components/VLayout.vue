@@ -1,7 +1,7 @@
 <template>
     <VHeader/>
     
-    <main class="content">
+    <main>
         <slot/>
     </main>
 
@@ -14,10 +14,11 @@ import VFooter from './VFooter.vue';
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .content{
     max-width: 1280px;
     padding: 32px 16px;
+    margin: auto;
 }
 
 

@@ -81,7 +81,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="home">
+  <div class="home content">
     <h2 class="title title--big">Nations</h2>
       <div class="container container__nations">
         <VNations v-for="(nationDetails, key) in nationsDetails"
@@ -115,14 +115,16 @@ onMounted(async () => {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
+    gap: 8px;
+    justify-content: space-around;
   }
 
   &__nations{
     display: flex;
-    gap: 16px;
+    gap: 8px;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
   }
 }
 

@@ -1,12 +1,12 @@
 <template>
-    <div class="horcard">
+    <RouterLink :to="`/nations/${name_min}`" class="horcard">
         <div class="horcard__txt">
             <img class="horcard__vision" :src="'https://api.genshin.dev/elements/' + vision + '/icon'" alt="">
             <h3 class="hordcard__title">{{name}}</h3>
         </div>
         
         <img class="horcard__bg" decoding="async" :src="'https://api.genshin.dev/nations/' + name_min + '/icon'" alt="">
-    </div>
+    </RouterLink>
 </template>
 
 <script setup>
@@ -44,6 +44,7 @@ const props = defineProps({
         display: flex;
         align-items: center;
         gap: 8px;
+        color: white;
     }
 
     &__bg{

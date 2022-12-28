@@ -1,73 +1,89 @@
 <template>
 
 <section v-if="character !== null">
-    <div class="chara__banner">
-        <img class="chara__splash" :src="endpointImg" alt="" @error="handleError">
-    </div>
-    <h1>{{character.name}}</h1>
-    <img class="chara__vision" :src="'https://api.genshin.dev/elements/' + character.vision.toLowerCase().trim() + '/icon'">  
-    <p>{{character.title}}</p>
-    <div class="chara__rarity">
-        <font-awesome-icon v-if="character.rarity==4" v-for="index in 4" :key="index" icon="fa-solid fa-star" />
-        <font-awesome-icon v-if="character.rarity==5" v-for="index in 5" :key="index" icon="fa-solid fa-star" />
+    <div class="top__banner">
+        <img class="top__art" :src="endpointImg" alt="" @error="handleError">
     </div>
 
-    <VTabs>
-        <VTab title="tab1" :name="'test'" :active="false">Description</VTab>
-        <VTab title="tab2" :name="'test'" :active="false">Skills</VTab>
-        <VTab title="tab3" :name="'test'" :active="false">Constellation</VTab>
-    </VTabs>
+    <div class="content">
+        <section class="top__text">
+            <div class="top__name-icon">
+                <h1>{{character.name}}</h1>
+                <img class="top__vision" :src="'https://api.genshin.dev/elements/' + character.vision.toLowerCase().trim() + '/icon'">  
+            </div>
+            <p class="chara__title">{{character.title}}</p>
+            <div class="chara__rarity">
+                <font-awesome-icon v-if="character.rarity==4" v-for="index in 4" :key="index" icon="fa-solid fa-star" />
+                <font-awesome-icon v-if="character.rarity==5" v-for="index in 5" :key="index" icon="fa-solid fa-star" />
+            </div>
+        </section>  
 
+        <VTabs :tabs="['Description', 'Skills', 'Constellation']" :active="active" @select="makeActive" class="container">
+        <VTab :active="active === 'Description'">
+                <section class="section section__description">
+                    <div class="section__el">
+                        <h2>Description</h2>
+                        <p>{{character.description}}</p>
+                    </div>
 
+                    <div class="section__el">
+                        <h2>Weapon</h2>
+                        <p>{{character.weapon}}</p>
+                    </div>
+                    
+                    
+                    <div v-if="character.birthday" class="section__el">
+                        <h2>Birthday</h2>
+                        <p>{{character.birthday.substring(5, 10)}}</p>
+                    </div>
 
-    <section class="description">
-        <h2>Description</h2>
-        <h3>Description</h3>
-        <p>{{character.description}}</p>
-        <h3>Weapon</h3>
-        <p>{{character.weapon}}</p>
-        <h3>Birthday</h3>
-        <p>{{character.birthday.substring(5, 10)}}</p>
-        <h3>Nation</h3>
-        <p>{{character.nation}}</p>
-        <h3>Constellation</h3>
-        <p>{{character.constellation}}</p>
-    </section>
-    <section class="skills">
-        <h2>Skills</h2>
-        <h3>Skill talents</h3>
-        <div v-for="skill in character.skillTalents">
-            <h4>{{ skill.unlock }} — {{ skill.name }}</h4>
-            <p>{{ skill.description }}</p>
-        </div>
-        <h3>Passive talents</h3>
-        <div v-for="talent in character.passiveTalents">
-            <h4>{{ talent.name }}</h4>
-            <p>{{ talent.description }}</p>
-            <small>{{ talent.unlock }}</small>
-        </div>
-    </section>
-    <section class="constellations">
-        <h2>Skills</h2>
-        <h3>Skill talents</h3>
-        <div v-for="skill in character.skillTalents">
-            <h4>{{ skill.unlock }} — {{ skill.name }}</h4>
-            <p>{{ skill.description }}</p>
-        </div>
-        <h3>Passive talents</h3>
-        <div v-for="talent in character.passiveTalents">
-            <h4>{{ talent.name }}</h4>
-            <p>{{ talent.description }}</p>
-            <small>{{ talent.unlock }}</small>
-        </div>
-    </section>
-        <h2>Constellations</h2>
-        <div v-for="constellation in character.constellations">
-            <h4>{{ constellation.unlock }} —{{ constellation.name }}</h4>
-            <p>{{ constellation.description }}</p>
-        </div>
+                    <div class="section__el">
+                        <h2>Nation</h2>
+                        <p>{{character.nation}}</p>
+                    </div>
+                    
+                    <div class="section__el">
+                        <h2>Constellation</h2>
+                        <p>{{character.constellation}}</p>
+                    </div>
+                </section>
+        </VTab>
 
-    </section>
+        <VTab :active="active === 'Skills'">
+                <section class="section section__skills">
+                    <div class="section section--big">
+                        <h2>Skill talents</h2>
+                        <div v-for="skill in character.skillTalents" class="section__el">
+                            <h3>{{ skill.unlock }} — {{ skill.name }}</h3>
+                            <p>{{ skill.description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2>Passive talents</h2>
+                        <div v-for="talent in character.passiveTalents" class="section__el">
+                            <h3>{{ talent.name }}</h3>
+                            <p>{{ talent.description }}</p>
+                            <small>{{ talent.unlock }}</small>
+                        </div>
+                    </div>
+                </section>
+        </VTab>
+
+        <VTab :active="active === 'Constellation'">
+                <section class="section section__constellations">
+                    <div v-for="constellation in character.constellations" class="section__el">
+                        <h2>{{ constellation.unlock }} — {{ constellation.name }}</h2>
+                        <p>{{ constellation.description }}</p>
+                    </div>
+                </section>
+        </VTab>
+        </VTabs>
+
+        <RouterLink to="/">← Back to home page</RouterLink>
+    </div>
+</section>
+    
 
 </template>
 
@@ -96,7 +112,7 @@ onMounted(async () => {
 
   character.value = response;
 
-    console.log(character)
+  console.log(character)
 })
 
 let endpointImg = ref(endpoint + '/gacha-splash');
@@ -104,16 +120,23 @@ const handleError = () => {
     endpointImg.value = endpoint + '/card'
 }
 
-</script>
-  
-<style scoped lang="scss">
-.chara{
+const active = ref('Description');
 
+const makeActive = (tab) => {
+    active.value = tab;
+}
+
+</script>
+
+<style lang="scss">
+
+.top{
     &__banner{
         max-width: 960px;
         margin: auto;
         z-index: -10;
         position: relative;
+        text-align: center;
         
 
         &::after{
@@ -129,7 +152,7 @@ const handleError = () => {
         }
     }
 
-    &__splash{
+    &__art{
         object-fit: cover;
         height: 30vh;
         width: 100%;
@@ -139,6 +162,68 @@ const handleError = () => {
             height: 40vh;
         }
     }
+
+    &__name-icon{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        h1{
+                font-size: 2em;
+        }
+        
+        & > * {
+            margin-bottom: 4px;
+        }
+
+        @media(min-width: 420px){
+            h1{
+                font-size: 3.2em;
+            }
+        }
+    }
+
+    &__vision{
+        width: 40px;
+        height: 40px;
+    }
+
+    &__text{
+        margin-bottom: 16px;
+    }
+}
+</style>
+  
+<style scoped lang="scss">
+
+.chara{
+
+    &__title{
+        margin-bottom: 8px;
+    }
+}
+
+.section{
+    & > * {
+        margin-bottom: 16px;
+    }
+
+    &__el{
+        & > * {
+        margin-bottom: 4px;
+        }
+
+    padding: 16px;
+    background-color: rgb(20, 20, 23);
+    border-radius: 8px;
+    }
+
+    &--big{
+        margin-bottom: 32px;
+    }
+}
+
+p{
+    max-width: 90ch;
 }
 
 </style>

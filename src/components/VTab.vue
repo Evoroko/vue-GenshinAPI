@@ -1,28 +1,20 @@
 <template>
-    <div @click="makeActive" class="tab">
-        <slot />
+    <div v-if="active">
+        <slot/>
     </div>
     
-    </template>
+</template>
 
 <script setup>
 
 import { ref } from 'vue';
 
 const props = defineProps({
-    title: {
-        type: String,
-        required: true
-    },
     active: {
         type: Boolean,
         status: false
     }
 })
-
-const makeActive = (e) => {
-    e.classList.add('test');
-}
 
 </script>
 

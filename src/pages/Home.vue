@@ -93,7 +93,7 @@ onMounted(async () => {
     
     
     <h2 class="title title--big">Personnages</h2>
-    <VLoader v-if="charactersDetails.length === 0">Chargement des personnages...</VLoader>
+    <VLoader v-if="charactersDetails.length === 0">Loading...</VLoader>
     <div class="container container__chara">
       <VCharaCard v-for="(character, characterKey) in charactersDetails"
           :rarity="character.rarity"

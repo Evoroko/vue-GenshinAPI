@@ -11,6 +11,9 @@
         <li>
           <RouterLink to="/about">About</RouterLink>
         </li>
+        <li>
+          <RouterLink to="/today">Today</RouterLink>
+        </li>
       </ul>
     </nav>
   </header>
@@ -19,12 +22,18 @@
 <style lang="scss" scoped>
 .header{
   background-color: #111113;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  top: 0;
 
   &__main-nav{
     display: flex;
     padding: 16px;
     gap: 32px;
     align-items: baseline;
+    max-width: 1600px;
+    margin: auto;
   }
 
   h1{

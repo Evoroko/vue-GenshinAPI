@@ -1,7 +1,7 @@
 <template>
     <VHeader/>
     
-    <main>
+    <main class="space">
         <slot/>
     </main>
 
@@ -19,6 +19,14 @@ import VFooter from './VFooter.vue';
     max-width: 1280px;
     padding: 32px 16px;
     margin: auto;
+}
+
+.space{
+    margin-top: 76px;
+
+    @media (min-width: 370px){
+        margin-top: 57px;
+    }
 }
 
 

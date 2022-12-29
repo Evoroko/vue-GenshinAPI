@@ -9,10 +9,10 @@
           <RouterLink to="/">Home</RouterLink>
         </li>
         <li>
-          <RouterLink to="/about">About</RouterLink>
+          <RouterLink to="/today">Today</RouterLink>
         </li>
         <li>
-          <RouterLink to="/today">Today</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
         </li>
       </ul>
     </nav>

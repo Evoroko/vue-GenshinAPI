@@ -62,10 +62,6 @@ fetch(endpointNations)
 
 
 
-
-
-
-
 const fetchNations = async () => {
   const nationfetchResponse = await fetch(endpointNations)
   return await nationfetchResponse.json()
@@ -76,13 +72,15 @@ onMounted(async () => {
 
   nations.value = nationsResponse
   console.log(nationsResponse)
-})
+});
+
 
 </script>
 
 <template>
   <div class="home content">
     <h2 class="title title--big">Nations</h2>
+    <VLoader v-if="nationsDetails.length === 0">Loading nations...</VLoader>
       <div class="container container__nations">
         <VNations v-for="(nationDetails, key) in nationsDetails"
           :name="nationDetails.name"
@@ -92,8 +90,8 @@ onMounted(async () => {
       </div>
     
     
-    <h2 class="title title--big">Personnages</h2>
-    <VLoader v-if="charactersDetails.length === 0">Loading...</VLoader>
+    <h2 class="title title--big">Characters</h2>
+    <VLoader v-if="charactersDetails.length === 0">Loading characters...</VLoader>
     <div class="container container__chara">
       <VCharaCard v-for="(character, characterKey) in charactersDetails"
           :rarity="character.rarity"
